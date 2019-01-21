@@ -1,5 +1,6 @@
 package com.paulojuniore.stopwatch;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ public class StopwatchActivity extends AppCompatActivity {
 
     private int seconds = 0;
     private boolean running;
+    private boolean wasRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,23 +21,32 @@ public class StopwatchActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             seconds = savedInstanceState.getInt("seconds");
             running = savedInstanceState.getBoolean("running");
+            wasRunning = savedInstanceState.getBoolean("wasRunning");
         }
         runTimer();
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putInt("seconds", seconds);
+        savedInstanceState.putBoolean("running", running);
+        savedInstanceState.putBoolean("wasRunning", wasRunning);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        if(wasRunning){
+            running = true;
+        }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
+        wasRunning = running;
+        running = false;
     }
 
     // Inicia o cronômetro quando o botão Start é clicado.
@@ -73,10 +84,4 @@ public class StopwatchActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putInt("seconds", seconds);
-        savedInstanceState.putBoolean("running", running);
-    }
 }

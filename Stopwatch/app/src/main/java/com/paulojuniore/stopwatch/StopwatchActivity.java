@@ -28,6 +28,16 @@ public class StopwatchActivity extends AppCompatActivity {
         super.onStart();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     // Inicia o cronômetro quando o botão Start é clicado.
     public void onClickStart(View view) {
         running = true;

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Computação UFCG</string>
+    <string name="logo_cc">Computação - UFCG</string>
+    <string-array name="options">
+        <item>Grade Curricular</item>
+        <item>Professores</item>
+        <item>Matrículas</item>
+    </string-array>
+</resources>

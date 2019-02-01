@@ -4,7 +4,7 @@ public class Grade {
 
     private String subjectName;
     private int workLoad;
-    private static final Grade[] subjects = {
+    public static final Grade[] subjects = {
             new Grade("Fund de Matemática P/ C. da Computação", 60),
             new Grade("Introdução a Computação", 60),
             new Grade("Laboratório de Programação I", 60),
@@ -24,12 +24,8 @@ public class Grade {
         return workLoad;
     }
 
-    public static Grade[] getSubjects() {
-        return subjects;
-    }
-
     public String toString() {
-        return subjectName;
+        return this.subjectName;
     }
 
 }

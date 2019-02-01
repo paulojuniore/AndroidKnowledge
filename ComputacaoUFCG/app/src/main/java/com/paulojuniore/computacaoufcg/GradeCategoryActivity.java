@@ -13,7 +13,7 @@ public class GradeCategoryActivity extends ListActivity {
 
         ListView listView = getListView();
         ArrayAdapter<Grade> listAdapter = new ArrayAdapter<Grade>(
-                this, android.R.layout.simple_list_item_1, Grade.getSubjects());
+                this, android.R.layout.simple_list_item_1, Grade.subjects);
 
         listView.setAdapter(listAdapter);
     }

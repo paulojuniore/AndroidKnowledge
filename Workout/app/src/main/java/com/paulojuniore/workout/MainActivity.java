@@ -3,7 +3,7 @@ package com.paulojuniore.workout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements WorkoutListFragment.WorkoutListListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,4 +13,10 @@ public class MainActivity extends AppCompatActivity {
         WorkoutDetailFragment frag = (WorkoutDetailFragment) getFragmentManager().findFragmentById(R.id.detail_fragment);
         frag.setWorkoutId(1);
     }
+
+    @Override
+    public void itemClicked(long id) {
+
+    }
+
 }

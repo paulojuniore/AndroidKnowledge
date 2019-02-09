@@ -27,8 +27,7 @@
         android:layout_below="@+id/time_view"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="@string/start"
-        android:onClick="onClickStart" />
+        android:text="@string/start" />
 
     <Button
         android:id="@+id/stop_button"
@@ -37,8 +36,7 @@
         android:layout_below="@id/start_button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="@string/stop"
-        android:onClick="onClickStop" />
+        android:text="@string/stop" />
 
     <Button
         android:id="@+id/reset_button"
@@ -47,7 +45,6 @@
         android:layout_below="@id/stop_button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="@string/reset"
-        android:onClick="onClickReset" />
+        android:text="@string/reset" />
 
 </RelativeLayout>

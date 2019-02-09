@@ -53,4 +53,5 @@ public class WorkoutDetailFragment extends Fragment {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putLong("workoutId", workoutId);
     }
+
 }

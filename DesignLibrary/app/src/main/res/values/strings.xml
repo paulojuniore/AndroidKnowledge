@@ -3,4 +3,6 @@
     <string name="nav_principal">Principal</string>
     <string name="nav_preferencias">Preferencias</string>
     <string name="nome_usuario">Nome de usuário</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
 </resources>

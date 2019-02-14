@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -73,7 +74,7 @@ public class MainActivity extends Activity {
 
         titles = getResources().getStringArray(R.array.titles);
         drawerList = (ListView) findViewById(R.id.drawer);
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, titles));
 
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -100,6 +101,9 @@ public class MainActivity extends Activity {
             }
         };
         drawerLayout.setDrawerListener(drawerToggle);
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
     }
 
     // Chamado quando invalidateOptionsMenu() é chamado.
@@ -119,6 +123,9 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if(drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
         switch (item.getItemId()) {
             case R.id.action_create_order:
                 Intent intent = new Intent(MainActivity.this, OrderActivity.class);
@@ -129,6 +136,18 @@ public class MainActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
     }
 
 }

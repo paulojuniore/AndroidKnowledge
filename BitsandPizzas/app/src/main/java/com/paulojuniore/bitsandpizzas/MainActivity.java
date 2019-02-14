@@ -2,6 +2,7 @@ package com.paulojuniore.bitsandpizzas;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,7 +22,7 @@ public class MainActivity extends Activity {
     }
 
     private void selectItem(int position) {
-        Fragment fragment;
+        Fragment fragment = null;
         switch (position) {
             case 0:
                 fragment = new TopFragment();
@@ -36,6 +37,11 @@ public class MainActivity extends Activity {
                 fragment = new StoresFragment();
                 break;
         }
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, fragment);
+        ft.addToBackStack(null);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
     }
 
     private String[] titles;

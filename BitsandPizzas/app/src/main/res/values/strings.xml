@@ -14,4 +14,14 @@
         <item>Diavolo</item>
         <item>Funghi</item>
     </string-array>
+
+    <string-array name="pastas">
+        <item>Spaghetti</item>
+        <item>Lasagne</item>
+    </string-array>
+
+    <string-array name="stores">
+        <item>Cabridge</item>
+        <item>Sebastopol</item>
+    </string-array>
 </resources>

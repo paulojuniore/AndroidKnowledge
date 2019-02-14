@@ -31,4 +31,7 @@
         <item>Cabridge</item>
         <item>Sebastopol</item>
     </string-array>
+    
+    <string name="open_drawer">Open drawer</string>
+    <string name="close_drawer">Close Drawer</string>
 </resources>

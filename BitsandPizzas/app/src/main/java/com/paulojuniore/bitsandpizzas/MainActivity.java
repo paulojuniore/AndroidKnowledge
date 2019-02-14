@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ public class MainActivity extends Activity {
     private String[] titles;
     private ListView drawerList;
     private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle drawerToggle;
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -78,6 +80,33 @@ public class MainActivity extends Activity {
         if(savedInstanceState == null) {
             selectItem(0);
         }
+
+        // Cria o ActionBarDrawerToogle
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_drawer, R.string.close_drawer) {
+            // Chamado quando a caixa de navegação estiver estabilizada em um estado completamente fechado
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                invalidateOptionsMenu();
+            }
+
+            // Chamado quando a caixa de navegação estiver estabilizada em um estado completamente aberto
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                /* Quando invalidateOptionsMenu() é chamado, o método onPrepareOptionsMenu() é chamado, ele pode ser sobrescrito
+                para especificar como os itens de menu devem ser alterados. */
+                invalidateOptionsMenu();
+            }
+        };
+    }
+
+    // Chamado quando invalidateOptionsMenu() é chamado.
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        boolean drawerOpen = drawerLayout.isDrawerOpen(drawerList);
+        menu.findItem(R.id.action_create_order).setVisible(!drawerOpen);
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override

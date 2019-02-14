@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,9 +15,14 @@ import android.widget.ListView;
 
 public class MainActivity extends Activity {
 
+    private String[] titles;
+    private ListView drawerList;
+    private DrawerLayout drawerLayout;
+
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // Código a ser executado quando um item da caixa de navegação for clicado.
             selectItem(position);
         }
     }
@@ -42,7 +48,10 @@ public class MainActivity extends Activity {
         ft.addToBackStack(null);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
+        // Configura o título da barra de ação
         setActionBarTitle(position);
+        // Fecha a caixa de navegação
+        drawerLayout.closeDrawer(drawerList);
     }
 
     private void setActionBarTitle(int position) {
@@ -55,9 +64,6 @@ public class MainActivity extends Activity {
         getActionBar().setTitle(title);
     }
 
-    private String[] titles;
-    private ListView drawerList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,9 +71,13 @@ public class MainActivity extends Activity {
 
         titles = getResources().getStringArray(R.array.titles);
         drawerList = (ListView) findViewById(R.id.drawer);
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, titles));
 
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
+        if(savedInstanceState == null) {
+            selectItem(0);
+        }
     }
 
     @Override

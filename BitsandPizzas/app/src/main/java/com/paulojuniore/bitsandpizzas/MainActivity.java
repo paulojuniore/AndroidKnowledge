@@ -99,6 +99,7 @@ public class MainActivity extends Activity {
                 invalidateOptionsMenu();
             }
         };
+        drawerLayout.setDrawerListener(drawerToggle);
     }
 
     // Chamado quando invalidateOptionsMenu() é chamado.

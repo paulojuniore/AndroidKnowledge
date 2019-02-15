@@ -1,6 +1,5 @@
 package com.paulojuniore.bandp;
 
-
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -18,6 +17,7 @@ public class StoreFragment extends ListFragment {
                              Bundle savedInstanceState) {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.stores));
+        setListAdapter(adapter);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 

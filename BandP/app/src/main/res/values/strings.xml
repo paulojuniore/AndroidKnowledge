@@ -6,6 +6,11 @@
     <string name="open_drawer">Drawer Open</string>
     <string name="close_drawer">Drawer Closed</string>
 
+    <string name="icon_home">Home</string>
+    <string name="icon_pizza">Pizzas</string>
+    <string name="icon_pasta">Pastas</string>
+    <string name="icon_store">Stores</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

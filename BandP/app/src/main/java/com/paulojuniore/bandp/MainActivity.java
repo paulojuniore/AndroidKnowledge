@@ -1,8 +1,10 @@
 package com.paulojuniore.bandp;
 
-import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private String[] titles;
     private ListView drawerList;
     private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle drawerToggle;
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -42,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new StoreFragment();
                 break;
         }
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, fragment);
+        ft.addToBackStack(null);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
+        // Fecha a caixa de navegação depois de um item ser clicado.
+        // drawerLayout.closeDrawer(drawerList);
     }
 
     @Override
@@ -55,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
 
         drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
                 titles));
+        drawerList.setOnItemClickListener(new DrawerItemClickListener());
+        if(savedInstanceState == null) {
+            selectItem(0);
+        }
     }
 
     @Override

@@ -1,11 +1,14 @@
 package com.paulojuniore.bandp;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -14,6 +17,32 @@ public class MainActivity extends AppCompatActivity {
     private String[] titles;
     private ListView drawerList;
     private DrawerLayout drawerLayout;
+
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // Código a ser executado quando um item da caixa de navegação for clicado.
+            selectItem(position);
+        }
+    }
+
+    private void selectItem(int position) {
+        Fragment fragment = null;
+        switch (position) {
+            case 0:
+                fragment = new TopFragment();
+                break;
+            case 1:
+                fragment = new PizzaFragment();
+                break;
+            case 2:
+                fragment = new PastaFragment();
+                break;
+            case 3:
+                fragment = new StoreFragment();
+                break;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         drawerList = (ListView) findViewById(R.id.drawer);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1,
+        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
                 titles));
     }
 

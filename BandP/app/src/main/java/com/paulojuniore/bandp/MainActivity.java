@@ -1,8 +1,8 @@
 package com.paulojuniore.bandp;
 
-import android.os.PersistableBundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,13 +14,14 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.drawer_layout);
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toogle);
         toogle.syncState();
 
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TopFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_home);
         }
@@ -49,23 +50,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         Fragment fragment = null;
+        String title = "Bits and Pizzas";
         switch (item.getItemId()) {
-            case R.id.nav_home:
-                fragment = new TopFragment();
-                break;
             case R.id.nav_pizza:
                 fragment = new PizzaFragment();
+                title = "Pizzas";
                 break;
             case R.id.nav_pasta:
                 fragment = new PastaFragment();
+                title = "Pastas";
                 break;
             case R.id.nav_store:
                 fragment = new StoreFragment();
+                title = "Stores";
+                break;
+            default:
+                fragment = new TopFragment();
                 break;
         }
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment, "visible_fragment").
+                addToBackStack(null).commit();
         drawer.closeDrawer(GravityCompat.START);
+        toolbar.setTitle(title);
         return true;
     }
-
 }

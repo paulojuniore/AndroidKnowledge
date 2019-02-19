@@ -19,7 +19,10 @@ public class BitsandPizzasDataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        db.execSQL("CREATE TABLE PIZZAS ("
+                + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "NAME TEXT, "
+                + "DESCRIPTION TEXT);");
     }
 
     @Override

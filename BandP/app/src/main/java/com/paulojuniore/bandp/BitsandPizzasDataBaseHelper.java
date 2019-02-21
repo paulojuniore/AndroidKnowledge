@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.annotation.Nullable;
 
 public class BitsandPizzasDataBaseHelper extends SQLiteOpenHelper {
 
@@ -14,7 +13,7 @@ public class BitsandPizzasDataBaseHelper extends SQLiteOpenHelper {
     // Versão do banco de dados
     private static final int DB_VERSION = 2;
 
-    public BitsandPizzasDataBaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public BitsandPizzasDataBaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -29,18 +28,28 @@ public class BitsandPizzasDataBaseHelper extends SQLiteOpenHelper {
     }
 
     private void updateMyDataBase(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion < 1) {
+        if(oldVersion < 1) {
             db.execSQL("CREATE TABLE PIZZAS ("
                     + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + "NAME TEXT, "
                     + "DESCRIPTION TEXT);");
-
             insertPizza(db, "Diavolo", "Delicious");
             insertPizza(db, "Funghi", "Especial");
-            insertPizza(db, "Magheritta", "Very good");
+            insertPizza(db, "Mista", "Very good");
+            insertPizza(db, "Moda da casa", "Very good");
+            insertPizza(db, "Napolitana", "Very good");
+            insertPizza(db, "Mussarela", "Very good");
+            insertPizza(db, "Frango", "Very good");
+            insertPizza(db, "Calabresa", "Very good");
+            insertPizza(db, "Bacon", "Very good");
+            insertPizza(db, "Cheddar", "Very good");
+            insertPizza(db, "Caipira", "Very good");
+            insertPizza(db, "Provolone", "Very good");
+
         }
-        if (oldVersion < 2) {
+        if(oldVersion < 2) {
             db.execSQL("ALTER TABLE PIZZAS ADD COLUMN FAVORITE NUMERIC");
+            insertPizza(db, "Frango com catupiry", "Very good");
         }
     }
 
